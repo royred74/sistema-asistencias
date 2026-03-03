@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏫 App San José</title>
+    <title>🏫 App San José - Login</title>
     <style>
         * {
             margin: 0;
@@ -14,64 +14,78 @@
         body {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        /* LOGIN */
         .login-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
         .login-header {
             text-align: center;
-            color: white;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .login-header h1 {
-            font-size: 3em;
+            color: #1e3c72;
+            font-size: 2.5em;
             margin-bottom: 10px;
         }
         .login-header p {
-            font-size: 1.2em;
-            opacity: 0.9;
+            color: #666;
         }
-        .user-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
+        .form-group {
+            margin-bottom: 20px;
         }
-        .user-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px 15px;
-            text-align: center;
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border-bottom: 5px solid;
-        }
-        .user-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .user-card .emoji {
-            font-size: 3.5em;
+            transition: background 0.3s;
             margin-bottom: 10px;
         }
-        .user-card h3 {
-            color: #333;
-            margin-bottom: 5px;
+        .btn-login:hover {
+            background: #2a5298;
         }
-        .user-card p {
-            color: #666;
+        .error-message {
+            color: #e74c3c;
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .info-message {
+            color: #27ae60;
+            text-align: center;
+            margin-top: 15px;
             font-size: 0.9em;
         }
-        .admin { border-color: #e74c3c; }
-        .director { border-color: #3498db; }
-        .profesor { border-color: #2ecc71; }
-        .estudiante { border-color: #f1c40f; }
-        .padre { border-color: #9b59b6; }
-        
-        /* DASHBOARD */
         .dashboard {
             max-width: 1200px;
             margin: 0 auto;
@@ -133,8 +147,6 @@
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
-        /* TABLAS */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -188,6 +200,27 @@
         .horario-card p {
             color: #666;
         }
+        .config-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .config-card input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+        .btn-cambiar {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -196,35 +229,32 @@
         <div id="login-screen" class="login-container">
             <div class="login-header">
                 <h1>🏫 App San José</h1>
-                <p>Sistema de Asistencias - Selecciona tu perfil</p>
+                <p>Inicia sesión con tu correo institucional</p>
             </div>
             
-            <div class="user-grid">
-                <div class="user-card admin" onclick="login(1)">
-                    <div class="emoji">👑</div>
-                    <h3>Ana Admin</h3>
-                    <p>Administradora</p>
-                </div>
-                <div class="user-card director" onclick="login(2)">
-                    <div class="emoji">🎯</div>
-                    <h3>Carlos Director</h3>
-                    <p>Director Académico</p>
-                </div>
-                <div class="user-card profesor" onclick="login(3)">
-                    <div class="emoji">📚</div>
-                    <h3>María Profesora</h3>
-                    <p>Matemáticas - 5to A</p>
-                </div>
-                <div class="user-card estudiante" onclick="login(4)">
-                    <div class="emoji">🧑‍🎓</div>
-                    <h3>Luis Estudiante</h3>
-                    <p>5to A - Sección A</p>
-                </div>
-                <div class="user-card padre" onclick="login(5)">
-                    <div class="emoji">👪</div>
-                    <h3>Roberto Padre</h3>
-                    <p>Padre de Luis</p>
-                </div>
+            <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" id="email" placeholder="ej: profesor@colegio.edu" value="maria@colegio.edu">
+            </div>
+            
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" placeholder="Tu contraseña" value="123456">
+            </div>
+            
+            <button class="btn-login" onclick="login()">Iniciar sesión</button>
+            
+            <div id="login-error" class="error-message"></div>
+            <div class="info-message">
+                📧 Prueba con estos correos:<br>
+                maria@colegio.edu (profesora)<br>
+                juan@colegio.edu (profesor)<br>
+                luis@colegio.edu (estudiante)<br>
+                sofia@colegio.edu (estudiante)<br>
+                admin@colegio.edu (admin)<br>
+                director@colegio.edu (director)<br>
+                padre@colegio.edu (padre)<br>
+                Contraseña: 123456
             </div>
         </div>
 
@@ -232,83 +262,45 @@
         <div id="profesor-dashboard" style="display: none;">
             <div class="dashboard">
                 <div class="dashboard-header">
-                    <h2>📚 Panel del Profesor - María Profesora</h2>
+                    <h2 id="profesor-name">📚 Panel del Profesor</h2>
                     <button class="btn-salir" onclick="logout()">Cerrar sesión</button>
                 </div>
                 <div class="dashboard-content">
                     <div class="sidebar">
                         <ul>
-                            <li class="active" onclick="showSection('cursos')">📖 Mis Cursos</li>
-                            <li onclick="showSection('asistencia')">📝 Tomar Asistencia</li>
-                            <li onclick="showSection('horarios')">⏰ Horarios</li>
+                            <li class="active" onclick="showProfesorSection('cursos')">📖 Mis Cursos</li>
+                            <li onclick="showProfesorSection('asistencia')">📝 Tomar Asistencia</li>
+                            <li onclick="showProfesorSection('horarios')">⏰ Mis Horarios</li>
+                            <li onclick="showProfesorSection('config')">⚙️ Cambiar contraseña</li>
                         </ul>
                     </div>
-                    <div class="main-panel" id="main-content">
+                    <div class="main-panel" id="profesor-content">
                         <!-- SECCIÓN CURSOS -->
-                        <div id="cursos-section">
+                        <div id="profesor-cursos">
                             <h3>Mis Cursos</h3>
-                            <div class="horario-card">
-                                <h4>Matemáticas - 5to A</h4>
-                                <p>Lunes y Miércoles 8:00 - 9:30 | Aula 203</p>
-                                <p>25 estudiantes</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Matemáticas - 5to B</h4>
-                                <p>Martes y Jueves 10:00 - 11:30 | Aula 205</p>
-                                <p>23 estudiantes</p>
-                            </div>
+                            <div id="cursos-lista"></div>
                         </div>
-                        <!-- SECCIÓN ASISTENCIA (oculta inicialmente) -->
-                        <div id="asistencia-section" style="display: none;">
-                            <h3>Tomar Asistencia - 5to A</h3>
-                            <p>Fecha: 03/03/2026</p>
-                            <table>
-                                <tr>
-                                    <th>Estudiante</th>
-                                    <th>Estado</th>
-                                    <th>Acción</th>
-                                </tr>
-                                <tr>
-                                    <td>Luis Estudiante</td>
-                                    <td id="estado1">Pendiente</td>
-                                    <td>
-                                        <button class="btn-asistencia" onclick="marcarAsistencia(1, 'presente')">✔ Presente</button>
-                                        <button class="btn-ausente" onclick="marcarAsistencia(1, 'ausente')">✘ Ausente</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ana Pérez</td>
-                                    <td id="estado2">Pendiente</td>
-                                    <td>
-                                        <button class="btn-asistencia" onclick="marcarAsistencia(2, 'presente')">✔ Presente</button>
-                                        <button class="btn-ausente" onclick="marcarAsistencia(2, 'ausente')">✘ Ausente</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Carlos López</td>
-                                    <td id="estado3">Pendiente</td>
-                                    <td>
-                                        <button class="btn-asistencia" onclick="marcarAsistencia(3, 'presente')">✔ Presente</button>
-                                        <button class="btn-ausente" onclick="marcarAsistencia(3, 'ausente')">✘ Ausente</button>
-                                    </td>
-                                </tr>
-                            </table>
+                        <!-- SECCIÓN ASISTENCIA -->
+                        <div id="profesor-asistencia" style="display: none;">
+                            <h3>Tomar Asistencia</h3>
+                            <select id="curso-select" onchange="cargarEstudiantes()">
+                                <option value="">Selecciona un curso</option>
+                            </select>
+                            <div id="asistencia-tabla"></div>
                         </div>
                         <!-- SECCIÓN HORARIOS -->
-                        <div id="horarios-section" style="display: none;">
+                        <div id="profesor-horarios" style="display: none;">
                             <h3>Mis Horarios</h3>
-                            <div class="horario-card">
-                                <h4>Lunes</h4>
-                                <p>8:00 - 9:30: Matemáticas 5to A (Aula 203)</p>
-                                <p>10:00 - 11:30: Matemáticas 5to B (Aula 205)</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Martes</h4>
-                                <p>8:00 - 9:30: Matemáticas 5to B (Aula 205)</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Miércoles</h4>
-                                <p>8:00 - 9:30: Matemáticas 5to A (Aula 203)</p>
+                            <div id="horarios-lista"></div>
+                        </div>
+                        <!-- SECCIÓN CONFIGURACIÓN -->
+                        <div id="profesor-config" style="display: none;">
+                            <h3>Cambiar contraseña</h3>
+                            <div class="config-card">
+                                <input type="password" id="nueva-pass" placeholder="Nueva contraseña">
+                                <input type="password" id="confirmar-pass" placeholder="Confirmar contraseña">
+                                <button class="btn-cambiar" onclick="cambiarPassword()">Actualizar contraseña</button>
+                                <div id="pass-message"></div>
                             </div>
                         </div>
                     </div>
@@ -320,74 +312,38 @@
         <div id="estudiante-dashboard" style="display: none;">
             <div class="dashboard">
                 <div class="dashboard-header">
-                    <h2>🧑‍🎓 Panel del Estudiante - Luis Estudiante</h2>
+                    <h2 id="estudiante-name">🧑‍🎓 Panel del Estudiante</h2>
                     <button class="btn-salir" onclick="logout()">Cerrar sesión</button>
                 </div>
                 <div class="dashboard-content">
                     <div class="sidebar">
                         <ul>
-                            <li class="active" onclick="showStudentSection('horarios')">⏰ Mis Horarios</li>
-                            <li onclick="showStudentSection('asistencia')">📅 Mi Asistencia</li>
-                            <li onclick="showStudentSection('profesores')">👨‍🏫 Mis Profesores</li>
+                            <li class="active" onclick="showEstudianteSection('horarios')">⏰ Mi Horario</li>
+                            <li onclick="showEstudianteSection('asistencia')">📅 Mi Asistencia</li>
+                            <li onclick="showEstudianteSection('profesores')">👨‍🏫 Mis Profesores</li>
+                            <li onclick="showEstudianteSection('config')">⚙️ Cambiar contraseña</li>
                         </ul>
                     </div>
-                    <div class="main-panel" id="student-content">
-                        <div id="student-horarios">
+                    <div class="main-panel" id="estudiante-content">
+                        <div id="estudiante-horarios">
                             <h3>Mi Horario de Clases</h3>
-                            <div class="horario-card">
-                                <h4>Lunes</h4>
-                                <p>8:00 - 9:30: Matemáticas - Prof. María</p>
-                                <p>10:00 - 11:30: Ciencias - Prof. Juan</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Martes</h4>
-                                <p>8:00 - 9:30: Lenguaje - Prof. Ana</p>
-                                <p>10:00 - 11:30: Matemáticas - Prof. María</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Miércoles</h4>
-                                <p>8:00 - 9:30: Matemáticas - Prof. María</p>
-                                <p>10:00 - 11:30: Historia - Prof. Carlos</p>
-                            </div>
+                            <div id="horario-estudiante"></div>
                         </div>
-                        <div id="student-asistencia" style="display: none;">
+                        <div id="estudiante-asistencia" style="display: none;">
                             <h3>Mi Asistencia</h3>
-                            <table>
-                                <tr>
-                                    <th>Fecha</th>
-                                    <th>Curso</th>
-                                    <th>Estado</th>
-                                </tr>
-                                <tr>
-                                    <td>01/03/2026</td>
-                                    <td>Matemáticas</td>
-                                    <td class="presente">Presente</td>
-                                </tr>
-                                <tr>
-                                    <td>02/03/2026</td>
-                                    <td>Ciencias</td>
-                                    <td class="presente">Presente</td>
-                                </tr>
-                                <tr>
-                                    <td>03/03/2026</td>
-                                    <td>Matemáticas</td>
-                                    <td class="presente">Presente</td>
-                                </tr>
-                            </table>
+                            <div id="asistencia-estudiante"></div>
                         </div>
-                        <div id="student-profesores" style="display: none;">
+                        <div id="estudiante-profesores" style="display: none;">
                             <h3>Mis Profesores</h3>
-                            <div class="horario-card">
-                                <h4>Matemáticas</h4>
-                                <p>Prof. María Torres</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Ciencias</h4>
-                                <p>Prof. Juan Pérez</p>
-                            </div>
-                            <div class="horario-card">
-                                <h4>Lenguaje</h4>
-                                <p>Prof. Ana García</p>
+                            <div id="profesores-lista"></div>
+                        </div>
+                        <div id="estudiante-config" style="display: none;">
+                            <h3>Cambiar contraseña</h3>
+                            <div class="config-card">
+                                <input type="password" id="est-nueva-pass" placeholder="Nueva contraseña">
+                                <input type="password" id="est-confirmar-pass" placeholder="Confirmar contraseña">
+                                <button class="btn-cambiar" onclick="cambiarPasswordEstudiante()">Actualizar contraseña</button>
+                                <div id="est-pass-message"></div>
                             </div>
                         </div>
                     </div>
@@ -397,72 +353,346 @@
     </div>
 
     <script>
-        // FUNCIONES DE LOGIN
-        function login(userId) {
-            if (userId === 3) { // Profesor
+        // BASE DE DATOS DE USUARIOS (correo y contraseña)
+        const usuarios = {
+            // Profesores
+            "maria@colegio.edu": { 
+                id: 1, 
+                nombre: "María Torres", 
+                rol: "profesor", 
+                password: "123456", 
+                curso: "Matemáticas", 
+                grado: "5to A" 
+            },
+            "juan@colegio.edu": { 
+                id: 2, 
+                nombre: "Juan Pérez", 
+                rol: "profesor", 
+                password: "123456", 
+                curso: "Ciencias", 
+                grado: "5to A" 
+            },
+            "ana@colegio.edu": { 
+                id: 3, 
+                nombre: "Ana García", 
+                rol: "profesor", 
+                password: "123456", 
+                curso: "Lenguaje", 
+                grado: "5to A" 
+            },
+            
+            // Estudiantes
+            "luis@colegio.edu": { 
+                id: 4, 
+                nombre: "Luis Estudiante", 
+                rol: "estudiante", 
+                password: "123456", 
+                grado: "5to A" 
+            },
+            "sofia@colegio.edu": { 
+                id: 5, 
+                nombre: "Sofía Martínez", 
+                rol: "estudiante", 
+                password: "123456", 
+                grado: "5to A" 
+            },
+            "carlos@colegio.edu": { 
+                id: 6, 
+                nombre: "Carlos López", 
+                rol: "estudiante", 
+                password: "123456", 
+                grado: "5to B" 
+            },
+            
+            // Otros
+            "admin@colegio.edu": { 
+                id: 7, 
+                nombre: "Ana Admin", 
+                rol: "admin", 
+                password: "123456" 
+            },
+            "director@colegio.edu": { 
+                id: 8, 
+                nombre: "Carlos Director", 
+                rol: "director", 
+                password: "123456" 
+            },
+            "padre@colegio.edu": { 
+                id: 9, 
+                nombre: "Roberto Padre", 
+                rol: "padre", 
+                password: "123456", 
+                hijos: [4,5] 
+            }
+        };
+
+        // DATOS DE CURSOS Y HORARIOS
+        const cursos = {
+            "5to A": {
+                Matemáticas: { profesor: 1, horario: "Lun y Mié 8:00-9:30", aula: 203 },
+                Ciencias: { profesor: 2, horario: "Mar y Jue 10:00-11:30", aula: 205 },
+                Lenguaje: { profesor: 3, horario: "Lun y Mié 10:00-11:30", aula: 204 }
+            },
+            "5to B": {
+                Matemáticas: { profesor: 1, horario: "Mar y Jue 8:00-9:30", aula: 203 },
+                Ciencias: { profesor: 2, horario: "Lun y Mié 10:00-11:30", aula: 205 },
+                Lenguaje: { profesor: 3, horario: "Mar y Jue 10:00-11:30", aula: 204 }
+            }
+        };
+
+        const estudiantes = {
+            4: { nombre: "Luis Estudiante", grado: "5to A" },
+            5: { nombre: "Sofía Martínez", grado: "5to A" },
+            6: { nombre: "Carlos López", grado: "5to B" }
+        };
+
+        let usuarioActual = null;
+
+        function login() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            
+            const usuario = usuarios[email];
+            
+            if (usuario && usuario.password === password) {
+                usuarioActual = usuario;
                 document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('profesor-dashboard').style.display = 'block';
-            } else if (userId === 4) { // Estudiante
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('estudiante-dashboard').style.display = 'block';
+                document.getElementById('login-error').innerText = '';
+                
+                if (usuario.rol === 'profesor') {
+                    document.getElementById('profesor-dashboard').style.display = 'block';
+                    document.getElementById('profesor-name').innerText = `📚 Prof. ${usuario.nombre} - ${usuario.curso}`;
+                    cargarDatosProfesor(usuario);
+                } else if (usuario.rol === 'estudiante') {
+                    document.getElementById('estudiante-dashboard').style.display = 'block';
+                    document.getElementById('estudiante-name').innerText = `🧑‍🎓 ${usuario.nombre}`;
+                    cargarDatosEstudiante(usuario);
+                } else {
+                    alert(`Bienvenido ${usuario.nombre} (${usuario.rol}). Los demás roles estarán disponibles pronto.`);
+                    logout();
+                }
             } else {
-                alert('Demo: Los otros usuarios (Admin, Director, Padre) estarán disponibles en la siguiente versión. Por ahora prueba Profesor o Estudiante.');
+                document.getElementById('login-error').innerText = '❌ Correo o contraseña incorrectos';
             }
         }
 
         function logout() {
+            usuarioActual = null;
             document.getElementById('profesor-dashboard').style.display = 'none';
             document.getElementById('estudiante-dashboard').style.display = 'none';
             document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
         }
 
         // FUNCIONES DEL PROFESOR
-        function showSection(section) {
-            // Ocultar todas las secciones
-            document.getElementById('cursos-section').style.display = 'none';
-            document.getElementById('asistencia-section').style.display = 'none';
-            document.getElementById('horarios-section').style.display = 'none';
-            
-            // Mostrar la seleccionada
-            if (section === 'cursos') {
-                document.getElementById('cursos-section').style.display = 'block';
-            } else if (section === 'asistencia') {
-                document.getElementById('asistencia-section').style.display = 'block';
-            } else if (section === 'horarios') {
-                document.getElementById('horarios-section').style.display = 'block';
+        function cargarDatosProfesor(profesor) {
+            const cursosDiv = document.getElementById('cursos-lista');
+            cursosDiv.innerHTML = '';
+            for (let grado in cursos) {
+                for (let curso in cursos[grado]) {
+                    if (cursos[grado][curso].profesor === profesor.id) {
+                        cursosDiv.innerHTML += `
+                            <div class="horario-card">
+                                <h4>${curso} - ${grado}</h4>
+                                <p>${cursos[grado][curso].horario} | Aula ${cursos[grado][curso].aula}</p>
+                                <p>Estudiantes: 25</p>
+                            </div>
+                        `;
+                    }
+                }
             }
             
-            // Actualizar clase activa en el menú
-            document.querySelectorAll('.sidebar li').forEach(li => li.classList.remove('active'));
-            event.target.classList.add('active');
+            const horariosDiv = document.getElementById('horarios-lista');
+            horariosDiv.innerHTML = '';
+            for (let grado in cursos) {
+                for (let curso in cursos[grado]) {
+                    if (cursos[grado][curso].profesor === profesor.id) {
+                        horariosDiv.innerHTML += `
+                            <div class="horario-card">
+                                <h4>${curso} - ${grado}</h4>
+                                <p>${cursos[grado][curso].horario} | Aula ${cursos[grado][curso].aula}</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+            
+            const select = document.getElementById('curso-select');
+            select.innerHTML = '<option value="">Selecciona un curso</option>';
+            for (let grado in cursos) {
+                for (let curso in cursos[grado]) {
+                    if (cursos[grado][curso].profesor === profesor.id) {
+                        select.innerHTML += `<option value="${grado}-${curso}">${curso} - ${grado}</option>`;
+                    }
+                }
+            }
+        }
+
+        function cargarEstudiantes() {
+            const cursoSeleccionado = document.getElementById('curso-select').value;
+            if (!cursoSeleccionado) return;
+            
+            const [grado, curso] = cursoSeleccionado.split('-');
+            
+            let tabla = '<table><tr><th>Estudiante</th><th>Estado</th><th>Acción</th></tr>';
+            
+            for (let id in estudiantes) {
+                if (estudiantes[id].grado === grado) {
+                    const estudiante = estudiantes[id];
+                    tabla += `
+                        <tr>
+                            <td>${estudiante.nombre}</td>
+                            <td id="estado-${id}">Pendiente</td>
+                            <td>
+                                <button class="btn-asistencia" onclick="marcarAsistencia(${id}, 'presente')">✔ Presente</button>
+                                <button class="btn-ausente" onclick="marcarAsistencia(${id}, 'ausente')">✘ Ausente</button>
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+            tabla += '</table>';
+            document.getElementById('asistencia-tabla').innerHTML = tabla;
         }
 
         function marcarAsistencia(estudianteId, estado) {
-            const estadoElement = document.getElementById('estado' + estudianteId);
-            if (estado === 'presente') {
-                estadoElement.innerHTML = '<span class="presente">Presente</span>';
-            } else {
-                estadoElement.innerHTML = '<span class="ausente">Ausente</span>';
+            const estadoElement = document.getElementById(`estado-${estudianteId}`);
+            if (estadoElement) {
+                estadoElement.innerHTML = estado === 'presente' ? '<span class="presente">Presente</span>' : '<span class="ausente">Ausente</span>';
+                alert('Asistencia registrada');
             }
-            alert('Asistencia registrada');
+        }
+
+        function showProfesorSection(section) {
+            document.getElementById('profesor-cursos').style.display = 'none';
+            document.getElementById('profesor-asistencia').style.display = 'none';
+            document.getElementById('profesor-horarios').style.display = 'none';
+            document.getElementById('profesor-config').style.display = 'none';
+            
+            if (section === 'cursos') {
+                document.getElementById('profesor-cursos').style.display = 'block';
+            } else if (section === 'asistencia') {
+                document.getElementById('profesor-asistencia').style.display = 'block';
+            } else if (section === 'horarios') {
+                document.getElementById('profesor-horarios').style.display = 'block';
+            } else if (section === 'config') {
+                document.getElementById('profesor-config').style.display = 'block';
+            }
+            
+            document.querySelectorAll('#profesor-dashboard .sidebar li').forEach(li => li.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function cambiarPassword() {
+            const nueva = document.getElementById('nueva-pass').value;
+            const confirmar = document.getElementById('confirmar-pass').value;
+            
+            if (!nueva || !confirmar) {
+                document.getElementById('pass-message').innerText = '❌ Completa ambos campos';
+                return;
+            }
+            
+            if (nueva !== confirmar) {
+                document.getElementById('pass-message').innerText = '❌ Las contraseñas no coinciden';
+                return;
+            }
+            
+            // Actualizar contraseña en la base de datos
+            const email = Object.keys(usuarios).find(key => usuarios[key].id === usuarioActual.id);
+            if (email) {
+                usuarios[email].password = nueva;
+                document.getElementById('pass-message').innerHTML = '✅ Contraseña actualizada correctamente';
+                document.getElementById('nueva-pass').value = '';
+                document.getElementById('confirmar-pass').value = '';
+            }
         }
 
         // FUNCIONES DEL ESTUDIANTE
-        function showStudentSection(section) {
-            document.getElementById('student-horarios').style.display = 'none';
-            document.getElementById('student-asistencia').style.display = 'none';
-            document.getElementById('student-profesores').style.display = 'none';
+        function cargarDatosEstudiante(estudiante) {
+            const grado = estudiante.grado;
+            
+            let horarioHTML = '';
+            for (let curso in cursos[grado]) {
+                const info = cursos[grado][curso];
+                const profesorEmail = Object.keys(usuarios).find(key => usuarios[key].id === info.profesor);
+                const profesor = usuarios[profesorEmail];
+                horarioHTML += `
+                    <div class="horario-card">
+                        <h4>${curso}</h4>
+                        <p>Prof. ${profesor.nombre}</p>
+                        <p>${info.horario} | Aula ${info.aula}</p>
+                    </div>
+                `;
+            }
+            document.getElementById('horario-estudiante').innerHTML = horarioHTML;
+            
+            let asistenciaHTML = '<table><tr><th>Fecha</th><th>Curso</th><th>Estado</th></tr>';
+            asistenciaHTML += `
+                <tr><td>01/03/2026</td><td>Matemáticas</td><td class="presente">Presente</td></tr>
+                <tr><td>02/03/2026</td><td>Ciencias</td><td class="presente">Presente</td></tr>
+                <tr><td>03/03/2026</td><td>Lenguaje</td><td class="presente">Presente</td></tr>
+            `;
+            asistenciaHTML += '</table>';
+            document.getElementById('asistencia-estudiante').innerHTML = asistenciaHTML;
+            
+            let profesoresHTML = '';
+            for (let curso in cursos[grado]) {
+                const info = cursos[grado][curso];
+                const profesorEmail = Object.keys(usuarios).find(key => usuarios[key].id === info.profesor);
+                const profesor = usuarios[profesorEmail];
+                profesoresHTML += `
+                    <div class="horario-card">
+                        <h4>${curso}</h4>
+                        <p>Prof. ${profesor.nombre}</p>
+                        <p>${profesorEmail}</p>
+                    </div>
+                `;
+            }
+            document.getElementById('profesores-lista').innerHTML = profesoresHTML;
+        }
+
+        function showEstudianteSection(section) {
+            document.getElementById('estudiante-horarios').style.display = 'none';
+            document.getElementById('estudiante-asistencia').style.display = 'none';
+            document.getElementById('estudiante-profesores').style.display = 'none';
+            document.getElementById('estudiante-config').style.display = 'none';
             
             if (section === 'horarios') {
-                document.getElementById('student-horarios').style.display = 'block';
+                document.getElementById('estudiante-horarios').style.display = 'block';
             } else if (section === 'asistencia') {
-                document.getElementById('student-asistencia').style.display = 'block';
+                document.getElementById('estudiante-asistencia').style.display = 'block';
             } else if (section === 'profesores') {
-                document.getElementById('student-profesores').style.display = 'block';
+                document.getElementById('estudiante-profesores').style.display = 'block';
+            } else if (section === 'config') {
+                document.getElementById('estudiante-config').style.display = 'block';
             }
             
-            document.querySelectorAll('.sidebar li').forEach(li => li.classList.remove('active'));
+            document.querySelectorAll('#estudiante-dashboard .sidebar li').forEach(li => li.classList.remove('active'));
             event.target.classList.add('active');
+        }
+
+        function cambiarPasswordEstudiante() {
+            const nueva = document.getElementById('est-nueva-pass').value;
+            const confirmar = document.getElementById('est-confirmar-pass').value;
+            
+            if (!nueva || !confirmar) {
+                document.getElementById('est-pass-message').innerText = '❌ Completa ambos campos';
+                return;
+            }
+            
+            if (nueva !== confirmar) {
+                document.getElementById('est-pass-message').innerText = '❌ Las contraseñas no coinciden';
+                return;
+            }
+            
+            const email = Object.keys(usuarios).find(key => usuarios[key].id === usuarioActual.id);
+            if (email) {
+                usuarios[email].password = nueva;
+                document.getElementById('est-pass-message').innerHTML = '✅ Contraseña actualizada correctamente';
+                document.getElementById('est-nueva-pass').value = '';
+                document.getElementById('est-confirmar-pass').value = '';
+            }
         }
     </script>
 </body>
