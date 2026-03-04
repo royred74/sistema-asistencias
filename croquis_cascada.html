@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croquis en Cascada - Sistema de Asistencias</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitulo {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+        }
+        .cascada {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+        .nivel {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            border-left: 8px solid;
+        }
+        .flecha {
+            font-size: 2em;
+            color: white;
+            margin: 5px 0;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        .admin { border-color: #e74c3c; }
+        .director { border-color: #3498db; }
+        .profesor { border-color: #2ecc71; }
+        .estudiante { border-color: #f1c40f; }
+        .padre { border-color: #9b59b6; }
+        
+        .cabecera {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .emoji {
+            font-size: 2.5em;
+        }
+        .titulo h2 {
+            font-size: 1.5em;
+            color: #333;
+        }
+        .titulo p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .funciones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .funcion-item {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #555;
+            border-left: 3px solid;
+        }
+        .admin .funcion-item { border-color: #e74c3c; }
+        .director .funcion-item { border-color: #3498db; }
+        .profesor .funcion-item { border-color: #2ecc71; }
+        .estudiante .funcion-item { border-color: #f1c40f; }
+        .padre .funcion-item { border-color: #9b59b6; }
+        
+        .relaciones {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #ddd;
+        }
+        .relacion {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+        .relacion .flecha-rel {
+            color: #666;
+            font-size: 1.2em;
+        }
+        .relacion .texto {
+            background: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 15px;
+            color: #444;
+        }
+        .ia {
+            background: #f1c40f;
+            color: #333;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .leyenda {
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        .colores {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .circulo {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏫 SISTEMA DE ASISTENCIAS</h1>
+        <div class="subtitulo">Croquis en cascada - 5 usuarios con relaciones</div>
+
+        <div class="cascada">
+            <!-- NIVEL 1: ADMIN -->
+            <div class="nivel admin">
+                <div class="cabecera">
+                    <div class="emoji">👑</div>
+                    <div class="titulo">
+                        <h2>Ana Admin</h2>
+                        <p>Administradora</p>
+                    </div>
+                </div>
+                <div class="funciones">
+                    <span class="funcion-item">✓ Crear usuarios</span>
+                    <span class="funcion-item">✓ Asignar roles</span>
+                    <span class="funcion-item">✓ Configurar sistema</span>
+                    <span class="funcion-item">✓ Ver reportes</span>
+                </div>
+                <div class="relaciones">
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Crea</strong> al Director</span>
+                    </div>
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Crea</strong> a Profesores</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flecha">⬇️</div>
+
+            <!-- NIVEL 2: DIRECTOR -->
+            <div class="nivel director">
+                <div class="cabecera">
+                    <div class="emoji">🎯</div>
+                    <div class="titulo">
+                        <h2>Carlos Director</h2>
+                        <p>Director Académico</p>
+                    </div>
+                </div>
+                <div class="funciones">
+                    <span class="funcion-item">✓ Ver notas globales</span>
+                    <span class="funcion-item">✓ Ver asistencias</span>
+                    <span class="funcion-item">✓ Enviar mensajes</span>
+                    <span class="funcion-item">✓ Enviar comunicados</span>
+                </div>
+                <div class="relaciones">
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Envía mensajes</strong> a Profesores</span>
+                    </div>
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Envía comunicados</strong> a Estudiantes</span>
+                    </div>
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Envía mensajes</strong> a Padres</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flecha">⬇️</div>
+
+            <!-- NIVEL 3: PROFESOR -->
+            <div class="nivel profesor">
+                <div class="cabecera">
+                    <div class="emoji">📚</div>
+                    <div class="titulo">
+                        <h2>María Profesora</h2>
+                        <p>Profesora de Matemáticas</p>
+                    </div>
+                </div>
+                <div class="funciones">
+                    <span class="funcion-item">✓ Editar notas</span>
+                    <span class="funcion-item">✓ Marcar asistencia</span>
+                    <span class="funcion-item">✓ Registrar incidencias</span>
+                    <span class="funcion-item">✓ Subir materiales</span>
+                </div>
+                <div class="relaciones">
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Marca asistencia</strong> de Estudiantes</span>
+                    </div>
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Envía mensajes</strong> a Padres</span>
+                    </div>
+                    <div class="relacion">
+                        <span class="flecha-rel">↓</span>
+                        <span class="texto"><strong>Registra incidencias</strong> de Estudiantes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flecha">⬇️</div>
+
+            <!-- NIVEL 4: ESTUDIANTE -->
+            <div class="nivel estudiante">
+                <div class="cabecera">
+                    <div class="emoji">🧑‍🎓</div>
+                    <div class="titulo">
+                        <h2>Luis Estudiante</h2>
+                        <p>Estudiante - 5to A</p>
+                        <span class="ia">🤖 IA ACTIVA</span>
+                    </div>
+                </div>
+                <div class="funciones">
+                    <span class="funcion-item">✓ Ver notas</span>
+                    <span class="funcion-item">✓ Ver asistencia</span>
+                    <span class="funcion-item">✓ Ver tareas</span>
+                    <span class="funcion-item">✓ Recibir mensajes</span>
+                </div>
+                <div class="relaciones">
+                    <div class="relacion">
+                        <span class="flecha-rel">↩️</span>
+                        <span class="texto"><strong>Recibe recomendaciones</strong> de IA <span class="ia">🤖</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flecha">⬇️</div>
+
+            <!-- NIVEL 5: PADRE -->
+            <div class="nivel padre">
+                <div class="cabecera">
+                    <div class="emoji">👪</div>
+                    <div class="titulo">
+                        <h2>Roberto Padre</h2>
+                        <p>Padre de familia</p>
+                    </div>
+                </div>
+                <div class="funciones">
+                    <span class="funcion-item">✓ Ver notas de hijos</span>
+                    <span class="funcion-item">✓ Ver asistencias</span>
+                    <span class="funcion-item">✓ Ver incidencias</span>
+                    <span class="funcion-item">✓ Recibir comunicados</span>
+                </div>
+                <div class="relaciones">
+                    <div class="relacion">
+                        <span class="flecha-rel">↩️</span>
+                        <span class="texto"><strong>Recibe mensajes</strong> del Director</span>
+                    </div>
+                    <div class="relacion">
+                        <span class="flecha-rel">↩️</span>
+                        <span class="texto"><strong>Recibe mensajes</strong> del Profesor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEYENDA -->
+        <div class="leyenda">
+            <h3 style="text-align: center; margin-bottom: 15px;">🎨 Leyenda de colores</h3>
+            <div class="colores">
+                <div class="color-item"><span class="circulo" style="background: #e74c3c;"></span> Administrador</div>
+                <div class="color-item"><span class="circulo" style="background: #3498db;"></span> Director</div>
+                <div class="color-item"><span class="circulo" style="background: #2ecc71;"></span> Profesor</div>
+                <div class="color-item"><span class="circulo" style="background: #f1c40f;"></span> Estudiante</div>
+                <div class="color-item"><span class="circulo" style="background: #9b59b6;"></span> Padre</div>
+                <div class="color-item"><span class="circulo" style="background: #f39c12;"></span> IA</div>
+            </div>
+            <p style="text-align: center; margin-top: 15px; color: #666;">Las flechas indican las relaciones entre usuarios</p>
+        </div>
+    </div>
+</body>
+</html>
