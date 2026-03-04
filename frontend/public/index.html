@@ -1,1 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏫 App San José</title>
+    <link rel="stylesheet" href="../fuente/css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">🏫</div>
+                <h1>App San José</h1>
+                <p>Sistema de Asistencias</p>
+            </div>
 
+            <div class="role-selector" id="roleSelector">
+                <button class="role-btn" onclick="selectRole('admin')">
+                    <span class="role-icon">👑</span>
+                    <span>Admin</span>
+                </button>
+                <button class="role-btn" onclick="selectRole('director')">
+                    <span class="role-icon">🎯</span>
+                    <span>Director</span>
+                </button>
+                <button class="role-btn" onclick="selectRole('profesor')">
+                    <span class="role-icon">📚</span>
+                    <span>Profesor</span>
+                </button>
+                <button class="role-btn" onclick="selectRole('estudiante')">
+                    <span class="role-icon">🧑‍🎓</span>
+                    <span>Estudiante</span>
+                </button>
+                <button class="role-btn" onclick="selectRole('padre')">
+                    <span class="role-icon">👪</span>
+                    <span>Padre</span>
+                </button>
+            </div>
+
+            <form id="loginForm" class="login-form hidden">
+                <div class="form-group">
+                    <label for="email">Correo institucional</label>
+                    <input type="email" id="email" placeholder="correo@colegio.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="button" class="btn-login" onclick="handleLogin()">Iniciar sesión</button>
+                <button type="button" class="btn-back" onclick="showRoleSelector()">← Volver</button>
+                <div id="errorMessage" class="error-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../fuente/js/core/auth.js"></script>
+    <script src="../fuente/js/login.js"></script>
+</body>
+</html>
