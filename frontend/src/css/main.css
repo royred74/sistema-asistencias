@@ -1,1 +1,166 @@
+:root {
+    --primary: #2e7d32;
+    --primary-dark: #1e5e22;
+    --secondary: #f6d365;
+    --secondary-dark: #f4c542;
+    --danger: #d32f2f;
+    --text: #333;
+    --bg-gradient: linear-gradient(135deg, var(--secondary) 0%, #fda085 100%);
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 15px;
+    background: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+}
+
+h1 {
+    color: var(--primary);
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+p {
+    color: #666;
+}
+
+.role-selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.role-btn {
+    padding: 15px 10px;
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    background: white;
+    color: var(--primary);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.role-btn:hover {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--text);
+}
+
+.role-btn.selected {
+    background: var(--primary);
+    color: white;
+}
+
+.role-icon {
+    font-size: 1.5em;
+}
+
+.hidden {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text);
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--secondary);
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-login, .btn-back {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 10px;
+}
+
+.btn-login {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-login:hover {
+    background: var(--primary-dark);
+}
+
+.btn-back {
+    background: var(--secondary);
+    color: var(--text);
+}
+
+.btn-back:hover {
+    background: var(--secondary-dark);
+}
+
+.error-message {
+    color: var(--danger);
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
